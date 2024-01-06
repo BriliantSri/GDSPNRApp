@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>GDS PNR Messages Generator</title>
+
+
+</head>
+<body style='overflow:hidden'>
+<frameset rows="15%,*,05%">
+	 <iframe src="frame1.jsp" name="frame1" height ='75px' width ='100%' frameBorder='0'></iframe>
+	 <!-- <iframe src="frame2.jsp" name="frame2" height="500px" width ='100%' align="left" frameBorder="0"> -->
+	
+		 <frameset rows="20%, 80%">
+		 	<iframe src="frame2.jsp" name="frameLeft" align="left" frameBorder="0"></iframe>
+		 	<iframe src="MainFrame.jsp" name="frameRight" height="500px" frameBorder="0"></iframe>
+		 </frameset>
+	
+	 <iframe src="CopyRight.jsp" name="frame3" id ="frame3" height ='50px' width ='100%' frameBorder="0"></iframe>
+ </frameset>
+ </body>
+</html>

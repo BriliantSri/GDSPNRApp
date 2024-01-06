@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;GDSAPP/src/main/java/serverlog&apos; to &apos;serverprog&apos;" description="Rename resource &apos;serverlog&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/java/serverlog" name="serverprog" stamp="1676448448955" updateReferences="true"/>
+</session>

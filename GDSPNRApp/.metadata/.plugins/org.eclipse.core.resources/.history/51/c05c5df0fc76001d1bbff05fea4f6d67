@@ -1,0 +1,98 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<body bgcolor="pink">
+<h3>Enter the below required details for creating GDS PNR</h3>
+<table>
+	<tr><td  width ='20%'>
+		<label>Select the GDS system</label><br>
+	</td><td width ='10%'><select>
+			<option>Select</option>
+			<option>Amadeus (1A)</option>
+			<option>Sabre (1S)</option>
+			<option>Galelio (1G)</option>
+			<option>Other (O)</option>
+			</select></td>
+	</tr>
+	<tr><td>
+		<label>Enter number of Adult passengers</label><br>
+	</td><td><select>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>6</option>
+			<option>7</option>
+			<option>8</option>
+			<option>9</option>
+			<option>10</option>
+			</select></td>
+	</tr>
+	<tr><td>
+		<label>Enter first passenger details</label><br>
+	</td><td><label>Passenger Type:</label></td><td>
+		<input type="radio" id="adultType" name="paxType" value="ADT">
+		<label for="html">Adult</label>
+		<input type="radio" id="chld" name="paxType" value="CHD">
+		<label for="css">Child</label>
+		<input type="radio" id="ins" name="paxType" value="INS">
+		<label for="javascript">Infant occupying seat</label><br>
+		<input type="radio" id="hasInfantYes" name="hasInfant" value="infYes">
+		<label for="html">Yes</label>
+		<input type="radio" id="hasInfantNo" name="hasInfant" value="infNo">
+		<label for="css">No</label>
+	</td>
+	</tr>
+	<tr><td>
+		<label>Enter number of Child passengers</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Enter number of Infant on lap passengers</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Enter number of Infant occupying passengers</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Any specific SSR to be added</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Enter the no of routes</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Enter flight details for segment</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Flight number</label><br>	
+	</td><td></td>
+	</tr>
+	<tr><td>		
+		<label>Origin</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Destination</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Date of journey</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Select the Fare type</label>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Select the Payment type</label>
+	</td><td></td>
+	</tr>
+</table>
+
+</body>
+</html>

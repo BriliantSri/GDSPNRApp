@@ -1,0 +1,12 @@
+1672071380555	Move 'base' to 'com'
+1672071391037	Move 3 resources to 'com'
+1672076985403	Move 'VerifyValidCredntials.jsp' to 'utilities'
+1672077000830	Move 'VerifyValidCredntials.jsp' to 'webapp'
+1672077017536	Delete element
+1672138353535	Rename resource 'GenerateMessages.jsp'
+1672138374816	Copy file
+1672138382399	Rename resource 'ProcessTTYMessage.jsp'
+1672138390404	Move 'GenerateTTYMessage.jsp' to 'webapp'
+1672138409219	Rename resource 'GenerateTTYMessage.jsp'
+1672138546148	Copy file
+1672215328101	Rename type 'SHRUtilitites'

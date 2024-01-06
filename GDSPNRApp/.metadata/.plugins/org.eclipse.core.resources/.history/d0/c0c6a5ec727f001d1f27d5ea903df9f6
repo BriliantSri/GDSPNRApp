@@ -1,0 +1,128 @@
+package com.gds.pnr;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Random;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
+
+public class PNRTTYMessageGenerator {
+	
+	private HashMap<Integer, String> paxMap;
+	private HashMap<Integer, String> segMap;
+	private String GDSName;
+	private int noOfPassengers;
+	private String fareType;
+	private String paymentType;
+	private HashMap<String, Object> gdsPNRTTYInputMap;
+	
+	public HashMap<Integer, String> getPaxMap() {
+		return paxMap;
+	}
+
+	public void setPaxMap(HashMap<Integer, String> paxMap) {
+		this.paxMap = paxMap;
+	}
+
+	public HashMap<Integer, String> getSegMap() {
+		return segMap;
+	}
+
+	public void setSegMap(HashMap<Integer, String> segMap) {
+		this.segMap = segMap;
+	}
+
+	public String getGDSName() {
+		return GDSName;
+	}
+
+	public void setGDSName(String gDSName) {
+		GDSName = gDSName;
+	}
+
+	public int getNoOfPassengers() {
+		return noOfPassengers;
+	}
+
+	public void setNoOfPassengers(int noOfPassengers) {
+		this.noOfPassengers = noOfPassengers;
+	}
+
+	public String getFareType() {
+		return fareType;
+	}
+
+	public void setFareType(String fareType) {
+		this.fareType = fareType;
+	}
+
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
+
+	public HashMap<String, Object> getGdsPNRTTYInputMap() {
+		return gdsPNRTTYInputMap;
+	}
+
+	public void setGdsPNRTTYInputMap(HashMap<String, Object> gdsPNRTTYInputMap) {
+		this.gdsPNRTTYInputMap = gdsPNRTTYInputMap;
+	}
+	public PNRTTYMessageGenerator() {
+		
+	}
+	
+	public String getPNRCreateTTYMessage() {
+		
+		String ttyMessage;
+		
+		ttyMessage = "Y";
+		ttyMessage = ttyMessage +"</br>" + "PTYRMCM";
+		ttyMessage = ttyMessage +"</br>" + ".MUCRM1A";
+		ttyMessage = ttyMessage +"</br>" + "MUC1A "+this.getGDSPNR();
+		ttyMessage = ttyMessage +"</br>" + "1JERE/ANFANGS";
+		ttyMessage = ttyMessage +"</br>" + "CM360Y26JULPTYLAXNN1";
+		return ttyMessage;
+	}
+	
+	private String getGDSPNR() {
+		String gdsPNR, dteString, timeString;
+		Date dte = new Date();
+		SimpleDateFormat smpDtFrmt = new SimpleDateFormat("ddMMyyyy");
+		SimpleDateFormat smpTimeFrmt = new SimpleDateFormat("hmmss");
+		dteString = smpDtFrmt.format(dte);
+		timeString = smpTimeFrmt.format(dte);
+		int mnth = Calendar.MONTH;
+		Random random = new Random();
+				
+		gdsPNR = getCharForNumber(mnth)+""+getString(Long.parseLong(dteString))+""+getString(Long.parseLong(dteString))
+		+""+(random.nextInt(900)+100);
+		
+		return gdsPNR;
+	}
+	
+	private String getCharForNumber(int i) {
+	    return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
+	}
+	
+	private String getString(long num) {
+		long tempNum =0;
+		
+		
+		do {
+			tempNum = tempNum + (num%10);
+			num=num/10;
+		}while(num > 0);
+		
+		while (tempNum > 26) {
+			tempNum = tempNum - 26;
+		}
+		return getCharForNumber( (int)tempNum);
+	}
+
+}

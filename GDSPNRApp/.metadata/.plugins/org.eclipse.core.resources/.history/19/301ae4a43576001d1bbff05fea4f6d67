@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html width ='100%' height ='100%'>
+<head>
+<meta charset="ISO-8859-1">
+<title>GDS PNR Messages Generator</title>
+<H1 align = center>GDS PNR Messages Generator</H1>
+</head>
+<body>
+ <iframe src="frame1.jsp" name="frame1" height ='10%' width ='100%'></iframe>
+ <iframe src="frame2.jsp" name="frame2" height="450" width ='620' align="left"></iframe>
+ <iframe src="frame3.jsp" name="frame3" height="450" width ='619' align="right"></iframe>
+ </body>
+</html>

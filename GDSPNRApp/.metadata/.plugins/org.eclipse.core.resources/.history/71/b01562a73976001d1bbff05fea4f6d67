@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<body bgcolor="pink">
+<h3>Enter the below required details for creating GDS PNR</h3>
+<label>Select the GDS system</label><br>
+<label>Enter number of Adult passengers</label><br>
+<label>Enter number of Child passengers</label><br>
+<label>Enter number of Infant on lap passengers</label><br>
+<label>Enter number of Infant occupying passengers</label><br>
+<label>Any specific SSR to be added</label><br>
+<label>Enter the no of routes</label><br>
+<label>Enter flight details for segment</label><br>
+<label>Flight number</label><br>
+<label>Origin</label><br>
+<label>Destination</label><br>
+<label>Date of journey</label><br>
+<label>Select the Fare type</label>
+<label>Select the Payment type</label>
+</body>
+</html>

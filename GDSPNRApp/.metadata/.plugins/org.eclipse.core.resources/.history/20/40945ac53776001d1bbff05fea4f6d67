@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<body bgcolor="pink">
+<h3>Contents</h3>
+<label>Select the GDS system</label><br>
+<label>Enter number of Adult passengers</label><br>
+<label>Enter number of Child passengers</label><br>
+<label>Enter number of Infant on lap passengers</label><br>
+<label>Enter number of Infant occupying passengers</label><br>
+<label>Any specific SSR to be added</label><br>
+<li>JSP</li>
+<li>Java Servlets</li>
+<li>JDBC</li>
+<li>Hibernate</li></ul>
+</body>
+</html>

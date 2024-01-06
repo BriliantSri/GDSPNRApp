@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;GDSAPP/src/main/webapp/utilitites&apos; to &apos;utilities&apos;" description="Rename resource &apos;utilitites&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/utilitites" name="utilities" stamp="1675252957714" updateReferences="true"/>
+</session>

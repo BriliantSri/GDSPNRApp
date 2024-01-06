@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;GDSAPP/src/main/webapp/HomePAge.jsp&apos; to &apos;HomePage.jsp&apos;" description="Rename resource &apos;HomePAge.jsp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/HomePAge.jsp" name="HomePage.jsp" stamp="1670415151260" updateReferences="true"/>
+</session>

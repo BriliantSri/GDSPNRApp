@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="Clip"/>
+		<item key="wrap" value="false"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="clip"/>
+			<item value="writePNRToFile"/>
+			<item value="common"/>
+			<item value="capabi"/>
+			<item value="capabilitites"/>
+			<item value="ucan"/>
+			<item value="update"/>
+			<item value="curre"/>
+			<item value="Transfer_Queue_Today_to_End_Date"/>
+			<item value="Search a booking by frequent traveler number"/>
+			<item value="Credit Card search (multiple results)(after create booking - issue)"/>
+			<item value="pay"/>
+			<item value="pa"/>
+			<item value="payment"/>
+			<item value="loyal"/>
+		</list>
+		<list key="replacehistory">
+			<item value="if(hdrCl!=null &amp;&amp; hdrCl.getStringCellValue().length()&gt;0 &amp;&amp; (hdrCl.getStringCellValue().equalsIgnoreCase(&quot;DepartureDateTime&quot;) || hdrCl.getStringCellValue().equalsIgnoreCase(&quot;TicketTimeLimit&quot;)|| hdrCl.getStringCellValue().equalsIgnoreCase(&quot;ArrivalDateTime&quot;))) {"/>
+			<item value="(hdrCl.getStringCellValue().equalsIgnoreCase(&quot;DepartureDateTime&quot;) || hdrCl.getStringCellValue().equalsIgnoreCase(&quot;TicketTimeLimit&quot;))"/>
+			<item value="Thr"/>
+			<item value="=&quot;NA&quot;;"/>
+			<item value=";"/>
+			<item value="departureDays"/>
+			<item value="&apos;"/>
+			<item value="autoTDSheetMap"/>
+			<item value="put(&quot;h"/>
+			<item value="airlinedesc"/>
+			<item value="segmentDtls"/>
+			<item value=".style.display=&apos;block&apos;"/>
+			<item value=".style.display=&apos;none&apos;"/>
+			<item value="+cntr"/>
+			<item value="dpCalendarDOJ"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="1522"/>
+		<item key="DIALOG_Y_ORIGIN" value="199"/>
+		<item key="DIALOG_WIDTH" value="385"/>
+		<item key="DIALOG_HEIGHT" value="611"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+</section>

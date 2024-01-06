@@ -1,0 +1,9 @@
+INDEX VERSION 1.131
+C:\Users\skokkula\workspace\GDSPNRApp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\982053653.index
+\GDSAPP\src\main\java
+C:\Users\skokkula\workspace\GDSPNRApp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2807739386.index
+\GDSPNRProject\src\main\java
+C:\Users\skokkula\workspace\GDSPNRApp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\716424996.index
+\GDSAPP\src\main\java
+C:\Users\skokkula\workspace\GDSPNRApp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1818323809.index
+\GDSAPP\src\main\resources

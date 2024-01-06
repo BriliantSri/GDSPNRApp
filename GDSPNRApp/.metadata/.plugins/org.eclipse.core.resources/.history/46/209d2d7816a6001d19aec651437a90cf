@@ -1,0 +1,555 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import = "com.model.*" %>
+<%@ page import = "com.common.*" %>
+ <%@ page import = "java.util.*" %>
+ <%@ page import = "java.sql.*" %>
+<!DOCTYPE html>
+<html>
+<script language ='javascript' type ="text/javascript">
+	var PaxTypeChoosen;
+	var prevPaxSelection=1;
+	var maxNoOfPaxSelected=0;
+	function assignParameters(){
+		var assignAllParameters = true;
+		var paxCount = document.getElementById("noOFPax").value;
+		var segCount = document.getElementById("noOFSeg").value;
+		if(checkFields()==false){
+			if (document.getElementById("gdsName")!=null && (document.getElementById("gdsName").value).trim()!=""){
+				//hiddenGDSName
+				document.getElementById("hiddenGDSName").value = document.getElementById("gdsName").value;			
+			}
+			//alert(document.getElementById("noOFSeg").value);
+			document.getElementById("hiddenNoOfPax").value = document.getElementById("noOFPax").value;
+			
+				
+			for (var i=1; i<=paxCount; i++){
+				if(assignAllParameters==true){	
+					assignAllParameters = assignPaxType(i);	
+					if(assignAllParameters == true){
+						//paxGivName
+						if(document.getElementById("paxSurName"+i)!=null){
+							document.getElementById("hiddenPaxSurName"+i).value = document.getElementById("paxSurName"+i).value;
+						}
+						
+						if(document.getElementById("paxGivName"+i)!=null){
+							document.getElementById("hiddenPaxGivName"+i).value = document.getElementById("paxGivName"+i).value;
+						}
+						
+						if(PaxTypeChoosen =='ADT'){
+							assignAllParameters = assignHasInfant(i);
+						}else if(PaxTypeChoosen == 'CHD'){
+							if(document.getElementById("chdAge"+i)!=null){
+								document.getElementById("hiddenCHDAge"+i).value = document.getElementById("chdAge"+i).value;
+							}						
+						}else if(PaxTypeChoosen == 'INS'){
+							if(document.getElementById("infantDOB"+i)!=null){
+								document.getElementById("hiddenINFDOB"+i).value = document.getElementById("infantDOB"+i).value;
+							}						
+						}
+					}				
+				}
+			}
+			document.getElementById("hiddenNoOfSeg").value = segCount
+			
+			
+			if(assignAllParameters==true){
+				for (var i=1; i<=segCount; i++){				
+					document.getElementById("hiddenAirLineCode"+i).value = document.getElementById("airLineCode"+i).value;
+					document.getElementById("hiddenFltNo"+i).value = document.getElementById("fltNo"+i).value;
+					document.getElementById("hiddenCOS"+i).value = document.getElementById("cos"+i).value;
+					document.getElementById("hiddenORG"+i).value = document.getElementById("org"+i).value;
+					document.getElementById("hiddenDES"+i).value = document.getElementById("des"+i).value;
+					document.getElementById("hiddenDOJ"+i).value = document.getElementById("doj"+i).value;
+					//document.getElementById("hiddenDOJDay"+i).value = document.getElementById("dojDay"+i).value;
+					//document.getElementById("hiddenDOJMonth"+i).value = document.getElementById("dojMonth"+i).value;
+				}			
+				document.getElementById("hiddenFareType").value = document.getElementById("fareType").value;
+				document.getElementById("hiddenPayType").value = document.getElementById("payType").value;
+			}		
+		}else{
+			assignAllParameters=false;
+		}
+			return assignAllParameters;
+	}
+	function assignPaxType(num) {
+        var ele = document.getElementsByName("paxType"+num);
+        var paxTypeSelected = false;
+        
+        for(let i = 0; i < ele.length; i++) {
+            if(ele[i].checked){
+            	PaxTypeChoosen = ele[i].value;
+	            paxTypeSelected = true;
+            }
+        }
+        
+        if (paxTypeSelected==false){
+        	alert("Select Paxtype if not selected");
+        }else{
+        	document.getElementById("hiddenPaxType"+num).value = PaxTypeChoosen;			
+        }
+        return paxTypeSelected;
+    }
+	function assignHasInfant(num) {
+        var ele = document.getElementsByName("hasInfant"+num);
+        var hasINFSelected = false;
+        var hasInfant=false;
+        for(i = 0; i < ele.length; i++) {
+            if(ele[i].checked){
+            	hasInfant  = ele[i].value;            	
+            	hasINFSelected = true;            	
+            }
+        }
+        if (hasINFSelected==false){
+        	alert("Select INF (Yes or No) if not selected");
+        }else{
+        	document.getElementById("hiddenHasInfant"+num).value = hasInfant;
+        	if(hasInfant=="Yes"){
+        		if(document.getElementById("infSurName"+num)!=null){
+					document.getElementById("hiddenSurINFName"+num).value = document.getElementById("infSurName"+num).value;
+				}
+        		if(document.getElementById("infGivName"+num)!=null){
+					document.getElementById("hiddenGivINFName"+num).value = document.getElementById("infGivName"+num).value;
+				}
+        		if(document.getElementById("infantDOB"+num)!=null){
+					document.getElementById("hiddenINFDOB"+num).value = document.getElementById("infantDOB"+num).value;
+				}
+        	}
+        }
+       return hasINFSelected;
+    }
+	function disPaxFields(){
+		//alert("inLoadFields");				
+		var i, paxCount;
+		var selectBox = document.getElementById("noOFPax");
+	    paxCount = selectBox.options[selectBox.selectedIndex].value;
+	    collapsePaxFields(paxCount);
+	    //alert(paxCount);
+	    
+		for (i=1; i<=paxCount; i++){				
+			if(document.getElementById("paxDtlsRow"+i)!=null && document.getElementById("paxDtlsRow"+i).visible != true){
+			 	document.getElementById("paxDtlsRow"+i).style.visibility='visible';
+			 	//infantName"+i
+			}
+			if(document.getElementById("paxTypeRow"+i)!=null){
+			 	document.getElementById("paxTypeRow"+i).style.visibility='visible';
+			 	//infantName"+i
+			}
+			if(document.getElementById("paxSurNameRow"+i)!=null){
+			 	document.getElementById("paxSurNameRow"+i).style.visibility='visible';
+			}
+			if(document.getElementById("paxGivNameRow"+i)!=null){
+			 	document.getElementById("paxGivNameRow"+i).style.visibility='visible';
+			}			
+			if(document.getElementById("adultType"+i)!=null && (i > parseInt(prevPaxSelection))){
+			 	document.getElementById("adultType"+i).checked=true;			 	
+			}	
+			if(document.getElementById("checkInfant"+i)!=null && (i > parseInt(prevPaxSelection))){
+			 	document.getElementById("checkInfant"+i).style.visibility='visible';
+			 	displayInfantRadio(i);				
+			}
+		}		
+		prevPaxSelection = paxCount;
+	}
+	function displayFltDtlFields(num){
+		var i;
+		var selectBox = document.getElementById("noOFSeg");		
+	    segmentCnt = selectBox.options[selectBox.selectedIndex].value;
+	    collapseFltDtlFields();
+	    
+	    resetFlds(segmentCnt);
+	    
+		for (i=1; i<=segmentCnt; i++){		
+			if(document.getElementById("tblFltDtls"+i)!=null){
+			 	document.getElementById("tblFltDtls"+i).style.display='block';
+			 	//infantName"+i
+			}		
+		}
+	}
+	function checkFields(){
+		var incorrectValueSelected = false;
+		var errorMessageString="";
+		var conditionalValue;
+		var cnt=0;
+		if(document.getElementById("gdsName")!=null){
+		 	if(document.getElementById("gdsName").value=='Select'){
+		 		errorMessageString = (cnt+1) + ". GDS System: Select the GDS System\n\n";
+		 		cnt++;
+			 	document.getElementById("gdsNameLabel").style.color ='Red';
+			 	incorrectValueSelected = true;		 
+			}else{
+				document.getElementById("gdsNameLabel").style.color ='Black';
+			}
+		}
+		
+		conditionalValue = "";
+		
+		//Checking pax fields entered or not
+		var selectBox = document.getElementById("noOFPax");
+		conditionalValue = selectBox.options[selectBox.selectedIndex].value;
+		for (i=1; i<=conditionalValue; i++){
+			if(document.getElementById("paxSurName"+i)!=null){
+				if((document.getElementById("paxSurName"+i).value).trim().length==0){
+					errorMessageString += (cnt+1) + ". Surname should not be blank for passenger - "+i+"\n\n";
+			 		cnt++;
+					document.getElementById("paxSurNamelbl"+i).style.color ='Red';
+				}else{
+					document.getElementById("paxSurNamelbl"+i).style.color ='Black';
+				}
+				
+			}
+			if(document.getElementById("paxGivName"+i)!=null){
+				if((document.getElementById("paxGivName"+i).value).trim().length==0){
+					errorMessageString += (cnt+1) + ". Given name should not be blank for passenger - "+i+"\n\n";
+			 		cnt++;
+					document.getElementById("paxGivNamelbl"+i).style.color ='Red';
+				}else{
+					document.getElementById("paxGivNamelbl"+i).style.color ='Black';
+				}
+			}
+			
+			if(document.getElementById("hasInfantYes"+i).checked){
+				if(document.getElementById("infSurName"+i)!=null){
+					if((document.getElementById("infSurName"+i).value).trim().length==0){
+						errorMessageString += (cnt+1) + ". Surname of infant should not be blank for passenger - "+i+"\n\n";
+				 		cnt++;
+						document.getElementById("infSurNamelbl"+i).style.color ='Red';
+					}else{
+						document.getElementById("infSurNamelbl"+i).style.color ='Black';
+					}
+				}
+				if(document.getElementById("infGivName"+i)!=null){
+					if((document.getElementById("infGivName"+i).value).trim().length==0){
+						document.getElementById("infGivNamelbl"+i).style.color ='Red';
+						errorMessageString += (cnt+1) + ". Given name of infant should not be blank for passenger - "+i+"\n\n";
+				 		cnt++;
+					}else{
+						document.getElementById("infGivNamelbl"+i).style.color ='Black';
+					}
+				}
+				if(document.getElementById("infantDOB"+i)!=null){
+					if((document.getElementById("infantDOB"+i).value).trim().length==0){
+						errorMessageString +=  (cnt+1) + ". Enter/Select the Date of birth of infant for passenger - "+i+"\n\n";					
+						document.getElementById("infantDOBlbl"+i).style.color ='Red';						
+						cnt++;
+						incorrectValueSelected = true;
+					}else if(validateDate(document.getElementById("infantDOB"+i))==false){
+						errorMessageString +=  (cnt+1) + ".Enter the Date of birth of infant in proper format (ddMMMyyyy) for passenger - "+i+"\n\n\n";
+						document.getElementById("infantDOBlbl"+i).style.color ='Red';						
+						cnt++;
+						incorrectValueSelected = true;		
+					}else{
+						document.getElementById("infantDOBlbl"+i).style.color ='Black';
+					}
+				}
+			}else{
+				document.getElementById("infSurNamelbl"+i).style.color ='Black';
+				document.getElementById("infGivNamelbl"+i).style.color ='Black';
+				document.getElementById("infantDOBlbl"+i).style.color ='Black';
+			}
+		}
+		selectBox = document.getElementById("noOFSeg");
+		conditionalValue = selectBox.options[selectBox.selectedIndex].value;
+		for (i=1; i<=conditionalValue; i++){
+			if(document.getElementById("airLineCode"+i)!=null){
+			 	//if(document.getElementById("airLineCode"+i).value=='Select'){
+			 		
+			 	if((document.getElementById("airLineCode"+i).value).trim().length==0){
+			 		//errorMessageString += (cnt+1) + ". Select the Airline code for segment - "+i+"\n\n";
+			 	
+			 		errorMessageString += (cnt+1) + ". Enter/ Select the Airline code for segment - "+i+"\n\n";
+			 		cnt++;
+				 	document.getElementById("airLineCodeLbl"+i).style.color ='Red';
+				 	incorrectValueSelected = true;		 
+				
+				}else{
+					document.getElementById("airLineCodeLbl"+i).style.color ='Black';
+				}
+			}
+			if(document.getElementById("fltNo"+i)!=null){
+				if((document.getElementById("fltNo"+i).value).trim().length==0){
+					errorMessageString += (cnt+1) + ". Enter Flight number for segment - "+i+"\n\n";
+			 		cnt++;
+					document.getElementById("fltNoLbl"+i).style.color ='Red';
+				}else{
+					document.getElementById("fltNoLbl"+i).style.color ='Black';
+				}
+				
+			}
+			if(document.getElementById("cos"+i)!=null){
+			 	if(document.getElementById("cos"+i).value=='Select'){
+			 		errorMessageString += (cnt+1) + ". Select the Class of Service for segment - "+i+"\n\n";
+			 		cnt++;
+				 	document.getElementById("cosLbl"+i).style.color ='Red';
+				 	incorrectValueSelected = true;		 
+				}else{
+					document.getElementById("cosLbl"+i).style.color ='Black';
+				}
+			}
+			if(document.getElementById("org"+i)!=null){
+			 	if(document.getElementById("org"+i).value.trim().length==0){
+			 		//errorMessageString += (cnt+1) + ". Select the Originating city for segment - "+i+"\n\n";
+			 		errorMessageString += (cnt+1) + ". Enter/ Select the Originating city for segment - "+i+"\n\n";
+			 		cnt++;
+				 	document.getElementById("orgLbl"+i).style.color ='Red';
+				 	incorrectValueSelected = true;		 
+				}else{
+					document.getElementById("orgLbl"+i).style.color ='Black';
+				}
+			}
+			if(document.getElementById("des"+i)!=null){
+			 	if(document.getElementById("des"+i).value.trim().length==0){
+			 		//errorMessageString += (cnt+1) + ". Select the Destination city for segment - "+i+"\n\n";
+			 		errorMessageString += (cnt+1) + ". Enter/ Select the Destination city for segment - "+i+"\n\n";
+			 		cnt++;
+				 	document.getElementById("desLbl"+i).style.color ='Red';
+				 	incorrectValueSelected = true;		 
+				}else{
+					document.getElementById("desLbl"+i).style.color ='Black';
+				}
+			}
+			if(document.getElementById("doj"+i)!=null){
+			 	if((document.getElementById("doj"+i).value).length==0){
+			 		errorMessageString += (cnt+1) + ". Select the Date of Journey for segment - "+i+"\n\n";
+			 		cnt++;
+			 		document.getElementById("dojLbl"+i).style.color ='Red';
+				 	incorrectValueSelected = true;	
+				}else{
+					document.getElementById("dojLbl"+i).style.color ='Black';
+				}
+			}
+			/*if(document.getElementById("dojDay"+i)!=null){
+			 	if(document.getElementById("dojDay"+i).value=="Day"){
+			 		errorMessageString += (cnt+1) + ". Select the Day of Journey-date for segment - "+i+"\n\n";
+			 		cnt++;
+			 		document.getElementById("dteJrnyLbl"+i).style.color ='Red';
+				 	incorrectValueSelected = true;	
+				}else{
+					document.getElementById("dteJrnyLbl"+i).style.color ='Black';
+				}
+			}
+			if(document.getElementById("dojMonth"+i)!=null){
+			 	if(document.getElementById("dojMonth"+i).value=='Month'){
+			 		errorMessageString += (cnt+1) + ". Select the Month of Journey date for segment - "+i+"\n\n";
+			 		cnt++;
+				 	document.getElementById("dteJrnyLbl"+i).style.color ='Red';
+				 	incorrectValueSelected = true;		 
+				}else{
+					document.getElementById("dteJrnyLbl"+i).style.color ='Black';
+				}
+			}*/
+			
+		}
+		/*
+		if(document.getElementById("fareType")!=null){
+		 	if(document.getElementById("fareType").value=='Select'){
+		 		errorMessageString += (cnt+1) + ". Select the Fare Type\n\n";
+		 		cnt++;
+			 	document.getElementById("fareTypeLbl").style.color ='Red';
+			 	incorrectValueSelected = true;		 
+			}else{
+				document.getElementById("fareTypeLbl").style.color ='Black';
+			}
+		}
+		if(document.getElementById("payType")!=null){
+		 	if(document.getElementById("payType").value=='Select'){
+		 		errorMessageString += (cnt+1) + ". Select the Payment Type\n\n";
+		 		cnt++;
+			 	document.getElementById("payTypeLbl").style.color ='Red';
+			 	incorrectValueSelected = true;		 
+			}else{
+				document.getElementById("payTypeLbl").style.color ='Black';
+			}
+		}*/
+		if(incorrectValueSelected==true){
+			alert(errorMessageString);
+		}
+		return incorrectValueSelected;
+	}
+	function validateDate(obj)
+	{
+	    var dteValue = obj.value;
+	    var pattern = /^([0-9]{2})([a-zA-Z]{3})([0-9]{2})$/;
+	    if (obj != null && !pattern.test(dteValue)) {	       
+	        return false;
+	    }
+	    else {
+	        return true
+	    }
+	}
+	function findNextTabStop(el) {
+	    var universe = document.querySelectorAll('input, button, select, textarea, a[href]');
+	    var list = Array.prototype.filter.call(universe, function(item) {return item.tabIndex >= "0"});
+	    var index = list.indexOf(el);
+	    return list[index + 1] || list[0];
+	  }
+	function tabNext(){
+		var nextEl = findNextTabStop(element);
+		nextEl.focus();
+	}
+	document.getElementById("id_of_textbox")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("id_of_button").click();
+    }
+	});
+	
+	function logOffApp(){
+		if (confirm("Confirm Log Off!") == true) {
+			document.forms["submitForm"].action = "LogOff.jsp";	
+			document.forms["submitForm"].submit();
+		}
+	}
+	
+	
+	function posDisp(){
+		document.forms["submitForm"].action = "POSPage.jsp";	
+		document.forms["submitForm"].submit();
+	}
+</script>
+<Style>
+.back-to-top {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
+</Style>
+
+
+<body bgcolor="#588BA3" >
+<h1 align = 'center'>GDS PNR Creation</h1><button value='Reset all' onClick ='onLoadFields();' class='back-to-top'>Reset All</button>
+<%
+
+String lniata = request.getAttribute("hiddenLniata")!=null? request.getAttribute("hiddenLniata").toString():"";
+String pos = request.getAttribute("hiddenPOS")!=null? request.getAttribute("hiddenPOS").toString():"";	
+String currency = request.getAttribute("hiddenCurr")!=null? request.getAttribute("hiddenCurr").toString():"";
+out.println("<h2 align = 'center'><b>POS: </b>" +pos+ " | Currency: "+currency+"</h1>");
+%>
+<h3>Enter/Select the below required details for creating GDS PNR</h3>
+<%
+//Deleted from Form tag
+		//onclick=" return generateFile();"
+		Connection connection = (Connection)session.getAttribute("connection");
+		if (connection==null || connection.isClosed()){
+			ConnectToDatabase connDB = new ConnectToDatabase();
+			connection = connDB.getConnection();
+		}
+
+		Iterator iter;	
+		TableDataService tbleDTTrans = new TableDataService(connection);
+		Vector gdsNameCodeVec = tbleDTTrans.getOAGDSDescCode();
+		//Setting some of the commonproperties to null 
+		CommonProperties.gdsPNR="";
+		CommonProperties.hostPNR="";
+		CommonProperties.ssrTKNEMsgs=null;
+		CommonProperties.segmentMap=null;
+		CommonProperties.passengerMap=null;
+		
+		//
+		out.println("<table>");
+		out.println("<tr><td width = '225px'><label id = 'gdsNameLabel'>Global distribution system:</label></td>");
+		out.println("<td><select id ='gdsName' name ='gdsName'><option>Select</option>");
+	 
+	if(gdsNameCodeVec.size()>0){
+		iter = gdsNameCodeVec.iterator();
+		while(iter.hasNext()){
+	out.println ("<option>"+iter.next()+"</option>");
+		}
+	}else{
+		out.println ("<option>AMADEUS (1A)</option>");
+		out.println ("<option>SABRE (1S)</option>");
+		out.println ("<option>GALELIO (1G)</option>");
+	}
+	out.println("</td></tr>");
+	out.println("<tr><td><label>Number of passengers:</label></td>");
+	out.println("<td><select id='noOFPax' name='noOFPax' onchange='disPaxFields()'>");
+	out.println("<option>1</option>");
+	out.println("<option>2</option>");
+	out.println("<option>3</option>");
+	out.println("<option>4</option>");
+	out.println("<option>5</option>");
+	out.println("<option>6</option>");
+	out.println("<option>7</option>");
+	out.println("<option>8</option>");
+	out.println("<option>9</option>");
+	//out.println("<option>10</option>");
+	out.println("</select></td></tr></table>");
+	%>
+	<jsp:include page="PassengerDetails.jsp"></jsp:include>
+	<%
+	out.println("<table><tr><td width = '225px'><label>Number of segments:</label></td>");
+	out.println("<td><select id='noOFSeg' name='noOFSeg' onchange ='displayFltDtlFields();'>");
+	out.println("<option>1</option>");
+	out.println("<option>2</option>");
+	out.println("<option>3</option>");
+	out.println("<option>4</option>");
+	out.println("<option>5</option>");
+	out.println("<option>6</option>");
+	out.println("<option>7</option>");
+	out.println("<option>8</option>");
+	out.println("<option>9</option>");
+	out.println("<option>10</option>");
+	out.println("</select></td></tr>");
+	out.println("</table>");
+	%>
+	<jsp:include page="FlightDetails.jsp"></jsp:include>
+	<%
+	out.println("<table><tr><td>");
+	
+		
+	out.println("<form method='POST' name = 'submitForm' onclick = 'return assignParameters();' action='ProcessTTYMessage.jsp'>");
+	out.println("<input type ='hidden' id = 'hiddenGDSName' name = 'hiddenGDSName' value =''/>");
+    out.println("<input type ='hidden' id = 'hiddenNoOfPax' name = 'hiddenNoOfPax' value =''/>");
+     out.println("<input type ='hidden' id = 'hiddenNoOfSeg' name = 'hiddenNoOfSeg' value =''/>");
+	for (int i = 1; i<=10; i++){
+		out.println("<input type ='hidden' id = 'hiddenPaxType"+i+"' name = 'hiddenPaxType"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenPaxSurName"+i+"' name = 'hiddenPaxSurName"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenPaxGivName"+i+"' name = 'hiddenPaxGivName"+i+"' value =''/>");
+		//Child age not required for now
+		//out.println("<input type ='hidden' id = 'hiddenCHDAge"+i+"' name = 'hiddenCHDAge"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenHasInfant"+i+"' name = 'hiddenHasInfant"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenSurINFName"+i+"' name = 'hiddenSurINFName"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenGivINFName"+i+"' name = 'hiddenGivINFName"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenINFDOB"+i+"' name = 'hiddenINFDOB"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenAirLineCode"+i+"' name = 'hiddenAirLineCode"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenFltNo"+i+"' name = 'hiddenFltNo"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenCOS"+i+"' name = 'hiddenCOS"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenORG"+i+"' name = 'hiddenORG"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenDES"+i+"' name = 'hiddenDES"+i+"' value =''/>");
+		out.println("<input type ='hidden' id = 'hiddenDOJ"+i+"' name = 'hiddenDOJ"+i+"' value =''/>");
+
+		
+	}
+	out.println("<input type ='hidden' id = 'hiddenFareType' name = 'hiddenFareType' value =''/>");
+	out.println("<input type ='hidden' id = 'hiddenPayType' name = 'hiddenPayType' value =''/>");	 
+    out.println("<div id ='submitDiv'>");
+	out.println("<input type='submit' value='Create PNR'>");	
+	out.println("</div>");
+	out.println("</form></td>");
+	out.println("<td><input type='button' value='Reset All' onClick ='onLoadFields();'></td>");
+	out.println("<td><input type='button' value='POS' onClick ='posDisp();'></td>");
+	out.println("<td><input type='button' value='Log Off' onClick ='logOffApp();'></td></tr>");
+	out.println("</table>");
+%>
+</body>
+	<script>
+//var inputText = document.getElementById("passWrd");
+   document.body.addEventListener("keyup", function(event) {
+     	if (event.keyCode === 13) {
+     		var acEle =  document.activeElement; 
+     		var runCode=true;     		
+     		if(acEle.id.length>0){
+     			//alert(acEle.id.substring(0,2));
+     			if(acEle.id.substring(0,3)=="org" || acEle.id.substring(0,3)=="des" || acEle.id.substring(0,3)=="doj" || acEle.id.substring(0,9)=="infantDOB" || acEle.id.substring(0,11)=="airLineCode"){
+     				runCode=false;
+     			}
+     		}
+     		if(runCode==true && assignParameters()==true){			    		  
+    		  document.forms["submitForm"].submit(); 
+    	  }
+      }	   
+   });
+	
+</script>	
+</html>

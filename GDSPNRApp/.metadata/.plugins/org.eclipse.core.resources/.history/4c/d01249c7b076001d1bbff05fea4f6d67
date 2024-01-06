@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<body bgcolor="pink">
+<h3>Enter the below required details for creating GDS PNR</h3>
+<table>
+	<tr><td>
+		<label>Select the GDS system</label><br>
+	</td><td><select>
+			<option>Select</option>
+			<option>Amadeus (1A)</option>
+			<option>Sabre (1S)</option>
+			<option>Galelio (1G)</option>
+			<option>Other (O)</option>
+			</select></td>
+	</tr>
+	<tr><td>
+		<label>Enter number of Adult passengers</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Enter number of Child passengers</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Enter number of Infant on lap passengers</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Enter number of Infant occupying passengers</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Any specific SSR to be added</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Enter the no of routes</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Enter flight details for segment</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Flight number</label><br>	
+	</td><td></td>
+	</tr>
+	<tr><td>		
+		<label>Origin</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Destination</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Date of journey</label><br>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Select the Fare type</label>
+	</td><td></td>
+	</tr>
+	<tr><td>
+		<label>Select the Payment type</label>
+	</td><td></td>
+	</tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>GDS PNR Messages Generator</title>
+<H1 align = center>GDS PNR Messages Generator</H1>
+</head>
+<body>
+	<frameset rows='10%'></frameset>
+	<frameset rows='90%'>
+		<frameset cols='50%'></frameset>
+		<frameset cols='50%'></frameset>
+	</frameset>
+	Hello This is first program
+</body>
+</html>

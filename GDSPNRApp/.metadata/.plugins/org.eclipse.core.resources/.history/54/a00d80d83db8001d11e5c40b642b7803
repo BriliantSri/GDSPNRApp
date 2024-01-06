@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import = "com.model.*" %>
+ <%@ page import = "java.util.*" %>
+ <%@ page import = "java.sql.*" %>
+ <%@ page import = "com.core.*" %>
+ <%@ page import = "com.common.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	Connection connection = (Connection)session.getAttribute("connection");
+	String envName = request.getParameter("hiddenEnv")!=null?	request.getParameter("hiddenEnv").toString():null; 
+	String logUserId = request.getParameter("hiddenUserID")!=null?	request.getParameter("hiddenUserID").toString():null;
+	String logPassword = request.getParameter("hiddenPassword")!=null?	request.getParameter("hiddenPassword").toString():null;
+	VerifyValidCredentials verifyValidCredentials = new VerifyValidCredentials();
+	String envCode, envURL;
+	envCode = envName.substring(0, envName.indexOf("("));
+	TableDataService tbleDTTrans = new TableDataService(connection);
+	envURL = tbleDTTrans.getEnvURL(envCode.trim());
+	
+	boolean isValidLoginsEntered = verifyValidCredentials.verifyValidLogins(envURL, logUserId, logPassword);
+	if(isValidLoginsEntered){
+		session.setAttribute("envURL", envURL);
+		session.setAttribute("logUserId", logUserId.trim());
+		session.setAttribute("logPassword", logPassword.trim());
+		CommonProperties.envURL=envURL;
+		CommonProperties.logID=logUserId;
+		CommonProperties.passWord=logPassword;
+		%>
+		<!--<jsp:forward page="POSPage.jsp"></jsp:forward>-->
+		<jsp:forward page="MainPage.jsp"></jsp:forward>
+		<%
+	}else{
+		%>
+		<jsp:forward page="LoginPage.jsp">
+    		<jsp:param name="message" value="Invalid credentials Provided"/>
+		</jsp:forward>
+		<%
+	}
+	
+%>
+
+</body>
+</html>
