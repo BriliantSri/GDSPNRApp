@@ -21,6 +21,8 @@ public class BrowserUtil {
 	    ////
 	    
 	    String dummyForGit="DummyGit";
+	    
+	    String dummyToGit="DummyToGit";
 	 
 	    String chrome_value = (output.get(2));
 	    String chrome_full_version = chrome_value.trim().split("   ")[2];
