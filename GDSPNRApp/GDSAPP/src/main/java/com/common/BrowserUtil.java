@@ -17,6 +17,10 @@ public class BrowserUtil {
 	    while ((s = stdInput.readLine()) != null) {
 	        output.add(s);
 	    }
+	    
+	    ////
+	    
+	    String dummyForGit="DummyGit";
 	 
 	    String chrome_value = (output.get(2));
 	    String chrome_full_version = chrome_value.trim().split("   ")[2];
